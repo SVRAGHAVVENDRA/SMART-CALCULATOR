@@ -1,7 +1,7 @@
 # SmartCalculator
 
 **Developer:** Vineeth  
-A simple command-line calculator built in Java 21 that performs basic arithmetic operations continuously via terminal input.
+A simple calculator built in Java 21 that performs basic arithmetic operations continuously.
 
 ## Project Structure
 
@@ -14,7 +14,6 @@ SmartCalculator/
 │   │   └── java/
 │   │       └── com/
 │   │           └── savoira/
-│   │               ├── Main.java
 │   │               └── SmartCalculator.java
 │   └── test/
 │       └── java/
@@ -31,11 +30,6 @@ SmartCalculator/
 ### Compile Project
 ```bash
 mvn clean compile
-```
-
-### Run Application
-```bash
-mvn exec:java -Dexec.mainClass="com.savoira.Main"
 ```
 
 ### Run Tests

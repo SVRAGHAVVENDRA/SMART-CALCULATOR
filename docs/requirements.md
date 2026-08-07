@@ -48,6 +48,5 @@
 
 ```text
 com.savoira/
-├── Main.java              <-- Reads input, runs while(true) loop, calls switch expression
-└── SmartCalculator.java    <-- Utility methods for calculation and validation
+└── SmartCalculator.java    <-- CLI entry point, continuous interactive loop, and calculation logic
 ```
