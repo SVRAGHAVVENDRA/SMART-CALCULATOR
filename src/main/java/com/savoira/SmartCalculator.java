@@ -24,6 +24,8 @@ public class SmartCalculator {
                     return Double.NaN;
                 }
                 return num1 % num2;
+            case '^':
+                return Math.pow(num1,num2);
             default:
                 System.out.println("Unknown operator");
                 return Double.NaN;
@@ -41,7 +43,7 @@ public class SmartCalculator {
             if (input.equalsIgnoreCase("exit")) {
                 break;
             }
-
+            // enter a number
             double num1;
             try {
                 num1 = Double.parseDouble(input);
@@ -49,7 +51,7 @@ public class SmartCalculator {
                 System.out.println("Invalid input! Please enter a valid number or 'exit'.");
                 continue;
             }
-
+            // enter operator
             System.out.print("Enter operator (+ - * / %): ");
             String opInput = sc.nextLine().trim();
             if (opInput.isEmpty()) {
@@ -57,7 +59,7 @@ public class SmartCalculator {
                 continue;
             }
             char op = opInput.charAt(0);
-
+            // enter second number
             System.out.print("Enter second number: ");
             String secondInput = sc.nextLine().trim();
             double num2;
