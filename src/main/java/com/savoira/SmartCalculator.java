@@ -5,29 +5,29 @@ import java.util.Scanner;
 public class SmartCalculator {
 
     public static double calculate(double num1, double num2, char operator) {
-        switch (operator) {
-            case '+':
-                return num1 + num2;
-            case '-':
-                return num1 - num2;
-            case '*':
-                return num1 * num2;
-            case '/':
+        return switch (operator) {
+            case '+' -> num1 + num2;
+            case '-' -> num1 - num2;
+            case '*' -> num1 * num2;
+            case '/' -> {
                 if (num2 == 0) {
                     System.out.println("Error: division by zero");
-                    return Double.NaN;
+                    yield Double.NaN;
                 }
-                return num1 / num2;
-            case '%':
+                yield num1 / num2;
+            }
+            case '%' -> {
                 if (num2 == 0) {
                     System.out.println("Error: division by zero");
-                    return Double.NaN;
+                    yield Double.NaN;
                 }
-                return num1 % num2;
-            default:
+                yield num1 % num2;
+            }
+            default -> {
                 System.out.println("Unknown operator");
-                return Double.NaN;
-        }
+                yield Double.NaN;
+            }
+        };
     }
 
     public static void main(String[] args) {
