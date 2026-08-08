@@ -24,6 +24,8 @@ public class SmartCalculator {
                     return Double.NaN;
                 }
                 return num1 % num2;
+            case '^':
+                return Math.pow(num1,num2);
             default:
                 System.out.println("Unknown operator");
                 return Double.NaN;
