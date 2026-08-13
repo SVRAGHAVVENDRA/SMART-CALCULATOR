@@ -43,18 +43,18 @@ public class SmartCalculator {
      * @param args the command-line arguments (not used)
      */
     public static void main(String[] args) {
-        logger.info("Starting SmartCalculator Application...");
+        logger.debug("Starting SmartCalculator Application...");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("=== SmartCalculator ===");
-        System.out.println("Type 'exit' to quit.");
+        logger.info("=== SmartCalculator ===");
+        logger.info("Type 'exit' to quit.");
 
         Calculator calculator = new Calculator();
 
         while (true) {
-            System.out.print("Enter first number (or 'exit'): ");
+            logger.info("Enter first number (or 'exit'): ");
             String input = scanner.nextLine().trim();
             if (input.equalsIgnoreCase("exit")) {
-                logger.info("User requested application exit.");
+                logger.debug("User requested application exit.");
                 break;
             }
 
@@ -62,28 +62,28 @@ public class SmartCalculator {
             try {
                 firstNumber = Double.parseDouble(input);
             } catch (NumberFormatException exception) {
-                logger.warn("Invalid first number input entered: '{}'", input);
-                System.out.println("Invalid input! Please enter a valid number or 'exit'.");
+                logger.debug("Invalid first number input entered: '{}'", input);
+                logger.warn("Invalid input! Please enter a valid number or 'exit'.");
                 continue;
             }
 
-            System.out.print("Enter operator (+ - * / %): ");
+            logger.info("Enter operator (+ - * / %): ");
             String operatorInput = scanner.nextLine().trim();
             if (operatorInput.isEmpty()) {
-                logger.warn("User entered an empty operator.");
-                System.out.println("Operator cannot be empty.");
+                logger.debug("User entered an empty operator.");
+                logger.warn("Operator cannot be empty.");
                 continue;
             }
             String operator = String.valueOf(operatorInput.charAt(0));
 
-            System.out.print("Enter second number: ");
+            logger.info("Enter second number: ");
             String secondInput = scanner.nextLine().trim();
             double secondNumber;
             try {
                 secondNumber = Double.parseDouble(secondInput);
             } catch (NumberFormatException exception) {
-                logger.warn("Invalid second number input entered: '{}'", secondInput);
-                System.out.println("Invalid input! Please enter a valid number.");
+                logger.debug("Invalid second number input entered: '{}'", secondInput);
+                logger.warn("Invalid input! Please enter a valid number.");
                 continue;
             }
 
@@ -91,11 +91,11 @@ public class SmartCalculator {
             double result = calculator.calculate(operation);
 
             if (!Double.isNaN(result)) {
-                System.out.printf("Result: %.2f%n", result);
+                logger.info(String.format("Result: %.2f", result));
             }
         }
-        System.out.println("Goodbye!");
-        logger.info("SmartCalculator Application terminated cleanly.");
+        logger.info("Goodbye!");
+        logger.debug("SmartCalculator Application terminated cleanly.");
         scanner.close();
     }
 }

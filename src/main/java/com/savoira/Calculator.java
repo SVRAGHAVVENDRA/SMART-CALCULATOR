@@ -30,7 +30,7 @@ public class Calculator {
         double second = operation.getSecondOperand();
         String op = operation.getOperator();
 
-        logger.info("Executing calculation: {} {} {}", first, op, second);
+        logger.debug("Executing calculation: {} {} {}", first, op, second);
 
         return switch (op) {
             case "+" -> first + second;
@@ -38,23 +38,23 @@ public class Calculator {
             case "*" -> first * second;
             case "/" -> {
                 if (second == 0) {
-                    logger.warn("Division by zero attempted: {} / {}", first, second);
-                    System.out.println("Error: division by zero");
+                    logger.debug("Division by zero attempted: {} / {}", first, second);
+                    logger.warn("Error: division by zero");
                     yield Double.NaN;
                 }
                 yield first / second;
             }
             case "%" -> {
                 if (second == 0) {
-                    logger.warn("Modulo by zero attempted: {} % {}", first, second);
-                    System.out.println("Error: division by zero");
+                    logger.debug("Modulo by zero attempted: {} % {}", first, second);
+                    logger.warn("Error: division by zero");
                     yield Double.NaN;
                 }
                 yield first % second;
             }
             default -> {
-                logger.error("Unknown operator used: {}", op);
-                System.out.println("Unknown operator");
+                logger.debug("Unknown operator used: {}", op);
+                logger.error("Unknown operator");
                 yield Double.NaN;
             }
         };
@@ -68,11 +68,11 @@ public class Calculator {
      */
     public static double squareRoot(double number) {
         if (number < 0) {
-            logger.warn("Square root of a negative number attempted: {}", number);
-            System.out.println("Error: Cannot calculate square root of a negative number.");
+            logger.debug("Square root of a negative number attempted: {}", number);
+            logger.warn("Error: Cannot calculate square root of a negative number.");
             return Double.NaN;
         }
-        logger.info("Calculating square root of: {}", number);
+        logger.debug("Calculating square root of: {}", number);
         return Math.sqrt(number);
     }
 
@@ -83,7 +83,7 @@ public class Calculator {
      * @return the value divided by 100
      */
     public static double percentage(double number) {
-        logger.info("Calculating percentage of: {}", number);
+        logger.debug("Calculating percentage of: {}", number);
         return number / 100.0;
     }
 }
