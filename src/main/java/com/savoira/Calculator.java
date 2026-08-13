@@ -12,13 +12,6 @@ public class Calculator {
     private static final Logger logger = LogManager.getLogger(Calculator.class);
 
     /**
-     * Default constructor for Calculator.
-     */
-    public Calculator() {
-        // No-arg constructor
-    }
-
-    /**
      * Performs calculations for the given Operation.
      * Evaluates the operator using a switch expression and applies the operation.
      *

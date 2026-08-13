@@ -14,13 +14,6 @@ public class SmartCalculator {
     private static final Logger logger = LogManager.getLogger(SmartCalculator.class);
 
     /**
-     * Default constructor for SmartCalculator.
-     */
-    public SmartCalculator() {
-        // No-arg constructor
-    }
-
-    /**
      * Calculates the result for the given inputs by delegating to the new OOP classes.
      * Maintained for backward compatibility with earlier phase builds and tests.
      *
