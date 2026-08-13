@@ -1,0 +1,89 @@
+package com.savoira;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * Handles the calculation logic for arithmetic operations and provides mathematical utilities.
+ * Follows the WORM (Write Once, Reuse Many) principle by centralizing arithmetic execution.
+ */
+public class Calculator {
+
+    private static final Logger logger = LogManager.getLogger(Calculator.class);
+
+    /**
+     * Default constructor for Calculator.
+     */
+    public Calculator() {
+        // No-arg constructor
+    }
+
+    /**
+     * Performs calculations for the given Operation.
+     * Evaluates the operator using a switch expression and applies the operation.
+     *
+     * @param operation the Operation containing operands and operator
+     * @return the double result of the operation, or Double.NaN if division/modulo by zero or unknown operator
+     */
+    public double calculate(Operation operation) {
+        double first = operation.getFirstOperand();
+        double second = operation.getSecondOperand();
+        String op = operation.getOperator();
+
+        logger.info("Executing calculation: {} {} {}", first, op, second);
+
+        return switch (op) {
+            case "+" -> first + second;
+            case "-" -> first - second;
+            case "*" -> first * second;
+            case "/" -> {
+                if (second == 0) {
+                    logger.warn("Division by zero attempted: {} / {}", first, second);
+                    System.out.println("Error: division by zero");
+                    yield Double.NaN;
+                }
+                yield first / second;
+            }
+            case "%" -> {
+                if (second == 0) {
+                    logger.warn("Modulo by zero attempted: {} % {}", first, second);
+                    System.out.println("Error: division by zero");
+                    yield Double.NaN;
+                }
+                yield first % second;
+            }
+            default -> {
+                logger.error("Unknown operator used: {}", op);
+                System.out.println("Unknown operator");
+                yield Double.NaN;
+            }
+        };
+    }
+
+    /**
+     * Calculates the square root of a given number.
+     *
+     * @param number the double value to find the square root of
+     * @return the square root of the number, or Double.NaN if the number is negative
+     */
+    public static double squareRoot(double number) {
+        if (number < 0) {
+            logger.warn("Square root of a negative number attempted: {}", number);
+            System.out.println("Error: Cannot calculate square root of a negative number.");
+            return Double.NaN;
+        }
+        logger.info("Calculating square root of: {}", number);
+        return Math.sqrt(number);
+    }
+
+    /**
+     * Calculates the percentage representation of a given number (divides by 100).
+     *
+     * @param number the double value to convert to a percentage
+     * @return the value divided by 100
+     */
+    public static double percentage(double number) {
+        logger.info("Calculating percentage of: {}", number);
+        return number / 100.0;
+    }
+}
