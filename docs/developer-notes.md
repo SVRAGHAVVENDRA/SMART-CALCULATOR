@@ -59,7 +59,7 @@ The reviewer's recommendation to follow **WORM** (Write Once, Reuse Many / Read 
 The application integrates Apache Log4j 2 for operational and developer-facing logs.
 
 ### Configuration
-Logging is configured via [log4j2.xml](file:///d:/SMART-CALCULATOR/src/main/resources/log4j2.xml) under `src/main/resources/`.
+Logging is configured via [log4j2.properties](file:///d:/SMART-CALCULATOR/src/main/resources/log4j2.properties) under `src/main/resources/`.
 *   **Log Output Location:** Logs are appended to `logs/calculator.log`.
 *   **Root Log Level:** `INFO`.
 *   **Console Separation:** Logs are routed exclusively to the file appender. This ensures that developers can review detailed logs and error traces in `logs/calculator.log` without cluttering the console interactive CLI layout.
