@@ -13,44 +13,19 @@ public class Calculator {
 
     /**
      * Performs calculations for the given Operation.
-     * Evaluates the operator using a switch expression and applies the operation.
+     * Delegates execution to the polymorphic calculate implementation.
      *
-     * @param operation the Operation containing operands and operator
-     * @return the double result of the operation, or Double.NaN if division/modulo by zero or unknown operator
+     * @param operation the Operation to run
+     * @return the double result of the operation, or Double.NaN if operation is null
      */
     public double calculate(Operation operation) {
-        double first = operation.getFirstOperand();
-        double second = operation.getSecondOperand();
-        String op = operation.getOperator();
-
-        logger.debug("Executing calculation: {} {} {}", first, op, second);
-
-        return switch (op) {
-            case "+" -> first + second;
-            case "-" -> first - second;
-            case "*" -> first * second;
-            case "/" -> {
-                if (second == 0) {
-                    logger.debug("Division by zero attempted: {} / {}", first, second);
-                    logger.warn("Error: division by zero");
-                    yield Double.NaN;
-                }
-                yield first / second;
-            }
-            case "%" -> {
-                if (second == 0) {
-                    logger.debug("Modulo by zero attempted: {} % {}", first, second);
-                    logger.warn("Error: division by zero");
-                    yield Double.NaN;
-                }
-                yield first % second;
-            }
-            default -> {
-                logger.debug("Unknown operator used: {}", op);
-                logger.error("Unknown operator");
-                yield Double.NaN;
-            }
-        };
+        if (operation == null) {
+            logger.debug("Attempted calculation with null operation.");
+            logger.error("Unknown operator");
+            return Double.NaN;
+        }
+        logger.debug("Executing calculation: {}", operation);
+        return operation.calculate();
     }
 
     /**

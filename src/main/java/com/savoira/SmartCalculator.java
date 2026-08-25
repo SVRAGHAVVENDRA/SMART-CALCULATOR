@@ -26,7 +26,14 @@ public class SmartCalculator {
     @Deprecated
     public static double calculate(double num1, double num2, char operator) {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(num1, String.valueOf(operator), num2);
+        Operation operation = switch (operator) {
+            case '+' -> new Addition(num1, num2);
+            case '-' -> new Subtraction(num1, num2);
+            case '*' -> new Multiplication(num1, num2);
+            case '/' -> new Division(num1, num2);
+            case '%' -> new Modulo(num1, num2);
+            default -> null;
+        };
         return calculator.calculate(operation);
     }
 
@@ -37,6 +44,20 @@ public class SmartCalculator {
      */
     public static void main(String[] args) {
         logger.debug("Starting SmartCalculator Application...");
+
+        // Polymorphism Demo for Week 5
+        logger.info("=== Polymorphism Demo ===");
+        java.util.List<Calculable> ops = java.util.List.of(
+            new Addition(10, 4),
+            new Subtraction(10, 4),
+            new Multiplication(10, 4),
+            new Division(10, 4)
+        );
+        for (Calculable op : ops) {
+            System.out.println(op.calculate());
+        }
+        logger.info("=========================");
+
         Scanner scanner = new Scanner(System.in);
         logger.info("=== SmartCalculator ===");
         logger.info("Type 'exit' to quit.");
@@ -80,7 +101,15 @@ public class SmartCalculator {
                 continue;
             }
 
-            Operation operation = new Operation(firstNumber, operator, secondNumber);
+            Operation operation = switch (operator) {
+                case "+" -> new Addition(firstNumber, secondNumber);
+                case "-" -> new Subtraction(firstNumber, secondNumber);
+                case "*" -> new Multiplication(firstNumber, secondNumber);
+                case "/" -> new Division(firstNumber, secondNumber);
+                case "%" -> new Modulo(firstNumber, secondNumber);
+                default -> null;
+            };
+
             double result = calculator.calculate(operation);
 
             if (!Double.isNaN(result)) {
