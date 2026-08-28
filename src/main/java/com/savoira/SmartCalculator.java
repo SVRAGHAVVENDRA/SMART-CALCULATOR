@@ -1,6 +1,8 @@
 package com.savoira;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,12 +49,11 @@ public class SmartCalculator {
 
         // Polymorphism Demo for Week 5
         logger.info("=== Polymorphism Demo ===");
-        java.util.List<Calculable> ops = java.util.List.of(
-            new Addition(10, 4),
-            new Subtraction(10, 4),
-            new Multiplication(10, 4),
-            new Division(10, 4)
-        );
+        List<Calculable> ops = new ArrayList<>();
+        ops.add(new Addition(10, 4));
+        ops.add(new Subtraction(10, 4));
+        ops.add(new Multiplication(10, 4));
+        ops.add(new Division(10, 4));
         for (Calculable op : ops) {
             System.out.println(op.calculate());
         }
