@@ -50,57 +50,63 @@ public class SmartCalculatorTest {
     @Test
     public void testCalculatorAddition() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(12.5, "+", 7.5);
+        Operation operation = new Addition(12.5, 7.5);
         assertEquals(20.0, calculator.calculate(operation), 0.0001);
+        assertEquals("Addition: 12.5 + 7.5 = 20.0", operation.toString());
     }
 
     @Test
     public void testCalculatorSubtraction() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(10.0, "-", 3.5);
+        Operation operation = new Subtraction(10.0, 3.5);
         assertEquals(6.5, calculator.calculate(operation), 0.0001);
+        assertEquals("Subtraction: 10.0 - 3.5 = 6.5", operation.toString());
     }
 
     @Test
     public void testCalculatorMultiplication() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(4.0, "*", 2.5);
+        Operation operation = new Multiplication(4.0, 2.5);
         assertEquals(10.0, calculator.calculate(operation), 0.0001);
+        assertEquals("Multiplication: 4.0 * 2.5 = 10.0", operation.toString());
     }
 
     @Test
     public void testCalculatorDivision() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(9.0, "/", 2.0);
+        Operation operation = new Division(9.0, 2.0);
         assertEquals(4.5, calculator.calculate(operation), 0.0001);
+        assertEquals("Division: 9.0 / 2.0 = 4.5", operation.toString());
     }
 
     @Test
     public void testCalculatorModulo() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(10.0, "%", 3.0);
+        Operation operation = new Modulo(10.0, 3.0);
         assertEquals(1.0, calculator.calculate(operation), 0.0001);
+        assertEquals("Modulo: 10.0 % 3.0 = 1.0", operation.toString());
     }
 
     @Test
     public void testCalculatorDivisionByZero() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(10.0, "/", 0.0);
+        Operation operation = new Division(10.0, 0.0);
         assertTrue(Double.isNaN(calculator.calculate(operation)));
+        assertTrue(Double.isNaN(operation.calculate()));
     }
 
     @Test
     public void testCalculatorModuloByZero() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(10.0, "%", 0.0);
+        Operation operation = new Modulo(10.0, 0.0);
         assertTrue(Double.isNaN(calculator.calculate(operation)));
+        assertTrue(Double.isNaN(operation.calculate()));
     }
 
     @Test
     public void testCalculatorInvalidOperator() {
         Calculator calculator = new Calculator();
-        Operation operation = new Operation(10.0, "invalid", 5.0);
-        assertTrue(Double.isNaN(calculator.calculate(operation)));
+        assertTrue(Double.isNaN(calculator.calculate(null)));
     }
 
     @Test

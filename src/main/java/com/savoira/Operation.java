@@ -1,51 +1,29 @@
 package com.savoira;
 
 /**
- * Represents a mathematical operation containing two operands and an operator.
- * Encapsulates the inputs required for a mathematical calculation.
+ * Abstract class representing a mathematical operation.
+ * Implements {@link Calculable} to define standard calculation behavior.
  */
-public class Operation {
-    private final double firstOperand;
-    private final String operator;
-    private final double secondOperand;
+public abstract class Operation implements Calculable {
+    protected final double a;
+    protected final double b;
 
     /**
-     * Constructs a new Operation with the specified operands and operator.
+     * Constructs a new Operation with two operands.
      *
-     * @param firstOperand  the first numeric operand
-     * @param operator      the mathematical operator (e.g., "+", "-", "*", "/", "%")
-     * @param secondOperand the second numeric operand
+     * @param a the first numeric operand
+     * @param b the second numeric operand
      */
-    public Operation(double firstOperand, String operator, double secondOperand) {
-        this.firstOperand = firstOperand;
-        this.operator = operator;
-        this.secondOperand = secondOperand;
+    protected Operation(double a, double b) {
+        this.a = a;
+        this.b = b;
     }
 
     /**
-     * Gets the first operand of this operation.
+     * Abstract method to calculate the result of the operation.
      *
-     * @return the first operand as a double
+     * @return the double result of the operation
      */
-    public double getFirstOperand() {
-        return firstOperand;
-    }
-
-    /**
-     * Gets the operator of this operation.
-     *
-     * @return the operator as a String
-     */
-    public String getOperator() {
-        return operator;
-    }
-
-    /**
-     * Gets the second operand of this operation.
-     *
-     * @return the second operand as a double
-     */
-    public double getSecondOperand() {
-        return secondOperand;
-    }
+    @Override
+    public abstract double calculate();
 }
