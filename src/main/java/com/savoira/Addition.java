@@ -4,7 +4,7 @@ package com.savoira;
  * Concrete class representing an addition operation.
  * Inherits from {@link Operation} and implements {@link Calculable}.
  */
-public class Addition extends Operation {
+public class Addition extends Operation implements Calculable {
 
     /**
      * Constructs a new Addition operation with the specified operands.

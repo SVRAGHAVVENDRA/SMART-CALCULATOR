@@ -4,7 +4,7 @@ package com.savoira;
  * Concrete class representing a multiplication operation.
  * Inherits from {@link Operation} and implements {@link Calculable}.
  */
-public class Multiplication extends Operation {
+public class Multiplication extends Operation implements Calculable {
 
     /**
      * Constructs a new Multiplication operation with the specified operands.

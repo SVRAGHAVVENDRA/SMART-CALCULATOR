@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
  * Concrete class representing a division operation.
  * Inherits from {@link Operation} and implements {@link Calculable}.
  */
-public class Division extends Operation {
+public class Division extends Operation implements Calculable {
     private static final Logger logger = LogManager.getLogger(Division.class);
 
     /**

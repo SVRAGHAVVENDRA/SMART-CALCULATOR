@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
  * Concrete class representing a modulo operation.
  * Inherits from {@link Operation} and implements {@link Calculable}.
  */
-public class Modulo extends Operation {
+public class Modulo extends Operation implements Calculable {
     private static final Logger logger = LogManager.getLogger(Modulo.class);
 
     /**
