@@ -40,6 +40,17 @@ public class SmartCalculator {
     }
 
     /**
+     * Validates whether the given operator string is supported.
+     * Delegates to {@link Calculator#isValidOperator(String)}.
+     *
+     * @param op the operator string to validate
+     * @return {@code true} if op is one of +, -, *, /, %; {@code false} otherwise
+     */
+    public static boolean isValidOperator(String op) {
+        return Calculator.isValidOperator(op);
+    }
+
+    /**
      * Main entry point for the interactive CLI loop.
      *
      * @param args the command-line arguments (not used)
@@ -83,13 +94,7 @@ public class SmartCalculator {
             }
 
             logger.info("Enter operator (+ - * / %): ");
-            String operatorInput = scanner.nextLine().trim();
-            if (operatorInput.isEmpty()) {
-                logger.debug("User entered an empty operator.");
-                logger.warn("Operator cannot be empty.");
-                continue;
-            }
-            String operator = String.valueOf(operatorInput.charAt(0));
+            String operator = scanner.nextLine().trim();
 
             logger.info("Enter second number: ");
             String secondInput = scanner.nextLine().trim();
@@ -102,16 +107,21 @@ public class SmartCalculator {
                 continue;
             }
 
-            Operation operation = switch (operator) {
-                case "+" -> new Addition(firstNumber, secondNumber);
-                case "-" -> new Subtraction(firstNumber, secondNumber);
-                case "*" -> new Multiplication(firstNumber, secondNumber);
-                case "/" -> new Division(firstNumber, secondNumber);
-                case "%" -> new Modulo(firstNumber, secondNumber);
-                default -> null;
-            };
-
             try {
+                if (!isValidOperator(operator)) {
+                    logger.debug("Invalid operator input entered: '{}'", operator);
+                    throw new InvalidOperationException("Unknown operator");
+                }
+
+                Operation operation = switch (operator) {
+                    case "+" -> new Addition(firstNumber, secondNumber);
+                    case "-" -> new Subtraction(firstNumber, secondNumber);
+                    case "*" -> new Multiplication(firstNumber, secondNumber);
+                    case "/" -> new Division(firstNumber, secondNumber);
+                    case "%" -> new Modulo(firstNumber, secondNumber);
+                    default -> throw new InvalidOperationException("Unknown operator");
+                };
+
                 double result = calculator.calculate(operation);
                 if (!Double.isNaN(result)) {
                     logger.info(String.format("Result: %.2f", result));

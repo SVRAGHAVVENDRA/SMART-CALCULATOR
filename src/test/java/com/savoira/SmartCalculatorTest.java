@@ -120,4 +120,35 @@ public class SmartCalculatorTest {
         assertEquals(1.5, Calculator.percentage(150.0), 0.0001);
         assertEquals(0.0, Calculator.percentage(0.0), 0.0001);
     }
+
+    @Test
+    public void testIsValidOperatorValid() {
+        assertTrue(Calculator.isValidOperator("+"));
+        assertTrue(Calculator.isValidOperator("-"));
+        assertTrue(Calculator.isValidOperator("*"));
+        assertTrue(Calculator.isValidOperator("/"));
+        assertTrue(Calculator.isValidOperator("%"));
+
+        assertTrue(SmartCalculator.isValidOperator("+"));
+        assertTrue(SmartCalculator.isValidOperator("-"));
+        assertTrue(SmartCalculator.isValidOperator("*"));
+        assertTrue(SmartCalculator.isValidOperator("/"));
+        assertTrue(SmartCalculator.isValidOperator("%"));
+    }
+
+    @Test
+    public void testIsValidOperatorInvalid() {
+        assertFalse(Calculator.isValidOperator("^"));
+        assertFalse(Calculator.isValidOperator("&"));
+        assertFalse(Calculator.isValidOperator("abc"));
+        assertFalse(Calculator.isValidOperator("++"));
+        assertFalse(Calculator.isValidOperator(""));
+        assertFalse(Calculator.isValidOperator(null));
+
+        assertFalse(SmartCalculator.isValidOperator("^"));
+        assertFalse(SmartCalculator.isValidOperator("&"));
+        assertFalse(SmartCalculator.isValidOperator("abc"));
+        assertFalse(SmartCalculator.isValidOperator(""));
+        assertFalse(SmartCalculator.isValidOperator(null));
+    }
 }

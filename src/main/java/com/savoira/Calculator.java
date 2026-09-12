@@ -53,4 +53,21 @@ public class Calculator {
         logger.debug("Calculating percentage of: {}", number);
         return number / 100.0;
     }
+
+    /**
+     * Validates whether the given operator string is a supported arithmetic operator.
+     * Supported operators are: {@code +}, {@code -}, {@code *}, {@code /}, {@code %}.
+     *
+     * @param op the operator string to validate
+     * @return {@code true} if op is one of +, -, *, /, %; {@code false} otherwise
+     */
+    public static boolean isValidOperator(String op) {
+        if (op == null) {
+            return false;
+        }
+        return switch (op) {
+            case "+", "-", "*", "/", "%" -> true;
+            default -> false;
+        };
+    }
 }
