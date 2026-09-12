@@ -78,7 +78,7 @@ public class SmartCalculator {
                 firstNumber = Double.parseDouble(input);
             } catch (NumberFormatException exception) {
                 logger.debug("Invalid first number input entered: '{}'", input);
-                logger.warn("Invalid input! Please enter a valid number or 'exit'.");
+                logger.warn("Please enter a valid number.");
                 continue;
             }
 
@@ -98,7 +98,7 @@ public class SmartCalculator {
                 secondNumber = Double.parseDouble(secondInput);
             } catch (NumberFormatException exception) {
                 logger.debug("Invalid second number input entered: '{}'", secondInput);
-                logger.warn("Invalid input! Please enter a valid number.");
+                logger.warn("Please enter a valid number.");
                 continue;
             }
 
@@ -111,10 +111,13 @@ public class SmartCalculator {
                 default -> null;
             };
 
-            double result = calculator.calculate(operation);
-
-            if (!Double.isNaN(result)) {
-                logger.info(String.format("Result: %.2f", result));
+            try {
+                double result = calculator.calculate(operation);
+                if (!Double.isNaN(result)) {
+                    logger.info(String.format("Result: %.2f", result));
+                }
+            } catch (InvalidOperationException | DivisionByZeroException exception) {
+                logger.warn(exception.getMessage());
             }
         }
         logger.info("Goodbye!");

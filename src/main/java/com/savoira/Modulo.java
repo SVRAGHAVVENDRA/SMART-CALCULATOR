@@ -22,16 +22,14 @@ public class Modulo extends Operation implements Calculable {
 
     /**
      * Calculates the remainder of division of the two operands.
-     * Handles modulo by zero by returning Double.NaN and logging a warning.
      *
-     * @return the result of a % b, or Double.NaN if b is zero
+     * @return the result of a % b
+     * @throws DivisionByZeroException if the divisor b is zero
      */
     @Override
     public double calculate() {
         if (b == 0) {
-            logger.debug("Modulo by zero attempted: {} % {}", a, b);
-            logger.warn("Error: division by zero");
-            return Double.NaN;
+            throw new DivisionByZeroException();
         }
         return a % b;
     }

@@ -16,13 +16,12 @@ public class Calculator {
      * Delegates execution to the polymorphic calculate implementation.
      *
      * @param operation the Operation to run
-     * @return the double result of the operation, or Double.NaN if operation is null
+     * @return the double result of the operation
+     * @throws InvalidOperationException if operation is null
      */
     public double calculate(Operation operation) {
         if (operation == null) {
-            logger.debug("Attempted calculation with null operation.");
-            logger.error("Unknown operator");
-            return Double.NaN;
+            throw new InvalidOperationException("Unknown operator");
         }
         logger.debug("Executing calculation: {}", operation);
         return operation.calculate();
