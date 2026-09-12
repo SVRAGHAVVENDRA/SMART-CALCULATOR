@@ -1,5 +1,7 @@
 package com.savoira;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,19 +23,19 @@ public class Division extends Operation implements Calculable {
     }
 
     /**
-     * Calculates the quotient of the two operands.
-     * Handles division by zero by returning Double.NaN and logging a warning.
+     * Calculates the quotient of the two operands using {@link BigDecimal} with scale 10.
      *
-     * @return the result of a / b, or Double.NaN if b is zero
+     * @return the result of a / b as a double
+     * @throws DivisionByZeroException if the divisor b is zero
      */
     @Override
     public double calculate() {
         if (b == 0) {
-            logger.debug("Division by zero attempted: {} / {}", a, b);
-            logger.warn("Error: division by zero");
-            return Double.NaN;
+            throw new DivisionByZeroException();
         }
-        return a / b;
+        BigDecimal bdA = BigDecimal.valueOf(this.a);
+        BigDecimal bdB = BigDecimal.valueOf(this.b);
+        return bdA.divide(bdB, 10, RoundingMode.HALF_UP).doubleValue();
     }
 
     /**

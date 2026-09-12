@@ -5,7 +5,9 @@ package com.savoira;
  * Implements {@link Calculable} to define standard calculation behavior.
  */
 public abstract class Operation implements Calculable {
+    /** The first numeric operand. */
     protected final double a;
+    /** The second numeric operand. */
     protected final double b;
 
     /**

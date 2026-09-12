@@ -37,14 +37,12 @@ public class SmartCalculatorTest {
 
     @Test
     public void testDivisionByZero() {
-        double result = SmartCalculator.calculate(10.0, 0.0, '/');
-        assertTrue(Double.isNaN(result));
+        assertThrows(DivisionByZeroException.class, () -> SmartCalculator.calculate(10.0, 0.0, '/'));
     }
 
     @Test
     public void testInvalidOperator() {
-        double result = SmartCalculator.calculate(10.0, 5.0, '^');
-        assertTrue(Double.isNaN(result));
+        assertThrows(InvalidOperationException.class, () -> SmartCalculator.calculate(10.0, 5.0, '^'));
     }
 
     @Test
@@ -91,22 +89,22 @@ public class SmartCalculatorTest {
     public void testCalculatorDivisionByZero() {
         Calculator calculator = new Calculator();
         Operation operation = new Division(10.0, 0.0);
-        assertTrue(Double.isNaN(calculator.calculate(operation)));
-        assertTrue(Double.isNaN(operation.calculate()));
+        assertThrows(DivisionByZeroException.class, () -> calculator.calculate(operation));
+        assertThrows(DivisionByZeroException.class, () -> operation.calculate());
     }
 
     @Test
     public void testCalculatorModuloByZero() {
         Calculator calculator = new Calculator();
         Operation operation = new Modulo(10.0, 0.0);
-        assertTrue(Double.isNaN(calculator.calculate(operation)));
-        assertTrue(Double.isNaN(operation.calculate()));
+        assertThrows(DivisionByZeroException.class, () -> calculator.calculate(operation));
+        assertThrows(DivisionByZeroException.class, () -> operation.calculate());
     }
 
     @Test
     public void testCalculatorInvalidOperator() {
         Calculator calculator = new Calculator();
-        assertTrue(Double.isNaN(calculator.calculate(null)));
+        assertThrows(InvalidOperationException.class, () -> calculator.calculate(null));
     }
 
     @Test
